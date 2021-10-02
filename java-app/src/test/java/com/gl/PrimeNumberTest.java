@@ -1,6 +1,8 @@
 package com.gl;
 
 import static org.junit.Assert.*;
+
+import com.gl.primenumber.PrimeNumber;
 import org.junit.Test;
 
 public class PrimeNumberTest {

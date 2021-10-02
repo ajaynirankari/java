@@ -1,4 +1,4 @@
-package com.gl;
+package com.gl.primenumber;
 
 import java.util.List;
 import java.util.stream.Collectors;
