@@ -191,5 +191,4 @@ public class ResidentMember {
                 ", \nitems[" + itemIndex + "]=>" + Arrays.toString(items) +
                 '}';
     }
-
 }
