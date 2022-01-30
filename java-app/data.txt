@@ -1,0 +1,8 @@
+This is a sample data for read
+14,300
+15,200
+10,500
+12,600
+45.4 67.8
+This no needed data
+end
