@@ -27,7 +27,7 @@ public class Sample {
         System.out.println("output = " + output);
 
 
-        char s = 'A';
+        char s = 'A'; // char is unsigned integer
         System.out.println("s = " + s);
         int a = (int) s;
         int b = s + 32;
