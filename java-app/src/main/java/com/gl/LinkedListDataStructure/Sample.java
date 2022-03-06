@@ -184,7 +184,7 @@ class MyLinkedList {
         j.element = t;
     }
 
-    static class Node {
+    private static class Node {
         int element;
         Node next;
 

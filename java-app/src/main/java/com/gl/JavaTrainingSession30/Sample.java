@@ -1,23 +1,16 @@
 package com.gl.JavaTrainingSession30;
 
-import org.w3c.dom.Node;
-
 public class Sample {
     public static void main(String[] args) {
         MyLinkedList myLinkedList = new MyLinkedList();
-        //System.out.println("myLinkedList.head = " + myLinkedList.head);
-        //System.out.println("myLinkedList.tail = " + myLinkedList.tail);
-
-        //myLinkedList.add(5);
-
-        //System.out.println("myLinkedList.head = " + myLinkedList.head);
-        //System.out.println("myLinkedList.tail = " + myLinkedList.tail);
-
-        //myLinkedList.add(7);
-
-        //System.out.println("myLinkedList.head = " + myLinkedList.head);
-        //System.out.println("myLinkedList.tail = " + myLinkedList.tail);
-
+        System.out.println("myLinkedList.head = " + myLinkedList.head);
+        System.out.println("myLinkedList.tail = " + myLinkedList.tail);
+        myLinkedList.add(5);
+        System.out.println("myLinkedList.head = " + myLinkedList.head);
+        System.out.println("myLinkedList.tail = " + myLinkedList.tail);
+        myLinkedList.add(7);
+        System.out.println("myLinkedList.head = " + myLinkedList.head);
+        System.out.println("myLinkedList.tail = " + myLinkedList.tail);
         myLinkedList.show();
         myLinkedList.add(3);
         myLinkedList.show();
@@ -33,7 +26,6 @@ public class Sample {
         myLinkedList.show();
         myLinkedList.addAfter(9, 98);
         myLinkedList.show();
-
         myLinkedList.addBefore(9, 97);
         myLinkedList.show();
 
@@ -44,7 +36,6 @@ public class Sample {
 class MyLinkedList {
     Node head;
     Node tail;
-    private Node previousNode;
 
     void add(int data) {
         Node temp = new Node();
@@ -69,7 +60,6 @@ class MyLinkedList {
     void addAfter(int data, int newData) {
         Node foundNode = getNode(data);
         linkNodeInLinkedList(data, newData, foundNode);
-
     }
 
     void addBefore(int data, int newData) {
@@ -130,8 +120,7 @@ class MyLinkedList {
         System.out.println();
     }
 
-
-    class Node {
+    private static class Node {
         int data;
         Node next;
     }
