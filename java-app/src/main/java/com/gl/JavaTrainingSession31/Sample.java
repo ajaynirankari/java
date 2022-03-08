@@ -27,6 +27,9 @@ public class Sample {
         myLinkedList.add(31);
         myLinkedList.showAll();
         myLinkedList.removeAtPosition(4);
+        myLinkedList.remove(31);
+        myLinkedList.showAll();
+        myLinkedList.add(11);
         myLinkedList.showAll();
     }
 }
@@ -61,6 +64,9 @@ class MyLinkedList {
             Node previousNode = getPreviousNode(data);
             if (previousNode != null) {
                 previousNode.next = foundNode.next;
+                if (foundNode == tail) {
+                    tail = previousNode;
+                }
             } else {
                 removeFirst();
             }
