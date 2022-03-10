@@ -1,6 +1,8 @@
 package com.gl.MoveAllZeroLeftAndAllOneInRight;
 
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.stream.Collectors;
 
 public class MoveAllZeroLeftAndAllOneInRightDemo {
     public static void main(String[] args) {
@@ -14,6 +16,17 @@ public class MoveAllZeroLeftAndAllOneInRightDemo {
         System.out.println("Arrays.toString(b) = " + Arrays.toString(b));
         moveAllZeroLeftAndAllOneInRightAnotherWay(b);
         System.out.println("Arrays.toString(b) = " + Arrays.toString(b));
+
+        int[] c = {0, 0, 0, 1, 0, 1, 0, 1, 1, 0, 0, 0, 1, 0, 1, 0};
+
+        var lists = Arrays.stream(c)
+                .boxed()
+                .collect(Collectors.partitioningBy(e -> e == 1))
+                .values()
+                .stream()
+                .flatMap(Collection::stream)
+                .toList();
+        System.out.println("lists = " + lists);
 
     }
 
