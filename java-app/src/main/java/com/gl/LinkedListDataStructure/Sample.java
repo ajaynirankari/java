@@ -1,5 +1,7 @@
 package com.gl.LinkedListDataStructure;
 
+import org.mockito.Mockito;
+
 public class Sample {
     public static void main(String[] args) {
         MyLinkedList myLinkedList = new MyLinkedList();
@@ -37,6 +39,15 @@ public class Sample {
         myLinkedList.showAllElements();
         myLinkedList.sort();
         myLinkedList.showAllElements();
+        myLinkedList.add(2);
+        myLinkedList.showAllElements();
+        myLinkedList.removeMiddleNode();
+        myLinkedList.showAllElements();
+        myLinkedList.add(9);
+        myLinkedList.showAllElements();
+        myLinkedList.removeMiddleNodeUsingTwoPointer();
+        myLinkedList.showAllElements();
+
     }
 }
 
@@ -182,6 +193,37 @@ class MyLinkedList {
         int t = i.element;
         i.element = j.element;
         j.element = t;
+    }
+
+    void removeMiddleNode() {
+        Node middleNode = getMiddlePreviousNode();
+        middleNode.next = middleNode.next.next;
+    }
+
+    void removeMiddleNodeUsingTwoPointer() {
+        Node middleNode = getMiddlePreviousNodeUsingTwoPointer();
+        middleNode.next = middleNode.next.next;
+    }
+
+    Node getMiddlePreviousNodeUsingTwoPointer() {
+        Node fastPointer = head;
+        Node slowPointer = head;
+        Node previous = null;
+        while (fastPointer.next != null) {
+            previous = slowPointer;
+            slowPointer = slowPointer.next;
+            fastPointer = fastPointer.next.next;
+        }
+        return previous;
+    }
+
+    Node getMiddlePreviousNode() {
+        int size = size();
+        Node temp = head;
+        for (int i = 1; i < size / 2; i++) {
+            temp = temp.next;
+        }
+        return temp;
     }
 
     private static class Node {
