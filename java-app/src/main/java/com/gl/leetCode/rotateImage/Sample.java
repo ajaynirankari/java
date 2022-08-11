@@ -1,7 +1,5 @@
 package com.gl.leetCode.rotateImage;
 
-import java.util.Arrays;
-
 public class Sample {
     public static void main(String[] args) {
         int[][] image2D = {
@@ -11,9 +9,6 @@ public class Sample {
                 {15, 14, 12, 16}
         };
         print2DImage(image2D);
-        //transposeMatrix(image2D);
-        //print2DImage(image2D);
-        //reverseMatrixRow(image2D);
         rotate(image2D);
         print2DImage(image2D);
     }
@@ -32,8 +27,11 @@ public class Sample {
     }
 
     static void reverseMatrixRow(int[][] a) {
-        for (int i = 0; i < a.length; i++) {
-            reverse1d(a[i]);
+//        for (int i = 0; i < a.length; i++) {
+//            reverse1d(a[i]);
+//        }
+        for (int[] row : a) {
+            reverse1d(row);
         }
     }
 
@@ -60,9 +58,17 @@ public class Sample {
     }
 
     static void print2DImage(int[][] image) {
-        for (int i = 0; i < image.length; i++) {
-            for (int j = 0; j < image[i].length; j++) {
-                System.out.print(image[i][j] + ",\t");
+//        for (int i = 0; i < image.length; i++) {
+//            for (int j = 0; j < image[i].length; j++) {
+//                System.out.print(image[i][j] + ",\t");
+//            }
+//            System.out.println();
+//        }
+//        System.out.println("---------------------------");
+
+        for (int[] row : image) {
+            for (int value : row) {
+                System.out.print(value + ",\t");
             }
             System.out.println();
         }
