@@ -1,7 +1,6 @@
 package com.gl.leetCode.BinaryTreePreorderTraversal;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class Sample {
     public static void main(String[] args) {
@@ -17,6 +16,8 @@ public class Sample {
         System.out.println("postOrderTraversal(root) = " + postOrderTraversal(root));
         System.out.println("levelOrderTraversal(root) = " + levelOrderTraversal(root));
         System.out.println("levelOrder(root) = " + levelOrder(root));
+        System.out.println("levelOrderUsingQueue(root) = " + levelOrderUsingQueue(root));
+        System.out.println("zigZagLevelOrderUsingQueue(root) = " + zigZagLevelOrderUsingQueue(root));
     }
 
     static List<Integer> preorderTraversal(TreeNode root) {
@@ -64,6 +65,55 @@ public class Sample {
         list.add(root.val);
     }
 
+    static List<List<Integer>> zigZagLevelOrderUsingQueue(TreeNode root) {
+        List<List<Integer>> list = new ArrayList<>();
+        if (root == null) {
+            return list;
+        }
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+        List<Integer> subList;
+        boolean f = false;
+        while (!queue.isEmpty()) {
+            int size = queue.size();
+            subList = new ArrayList<>();
+            for (int i = 0; i < size; i++) {
+                TreeNode node = queue.remove();
+                if (node.left != null) queue.add(node.left);
+                if (node.right != null) queue.add(node.right);
+                subList.add(node.val);
+            }
+            if (f) {
+                Collections.reverse(subList);
+            }
+            f = !f;
+            list.add(subList);
+        }
+        return list;
+    }
+
+    static List<List<Integer>> levelOrderUsingQueue(TreeNode root) {
+        List<List<Integer>> list = new ArrayList<>();
+        if (root == null) {
+            return list;
+        }
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+        List<Integer> subList;
+        while (!queue.isEmpty()) {
+            int size = queue.size();
+            subList = new ArrayList<>();
+            for (int i = 0; i < size; i++) {
+                TreeNode node = queue.remove();
+                if (node.left != null) queue.add(node.left);
+                if (node.right != null) queue.add(node.right);
+                subList.add(node.val);
+            }
+            list.add(subList);
+        }
+        return list;
+    }
+
     static List<List<Integer>> levelOrder(TreeNode root) {
         List<List<Integer>> list = new ArrayList<>();
         List<Integer> list1 = new ArrayList<>();
@@ -84,6 +134,7 @@ public class Sample {
         }
         return list;
     }
+
 
     static boolean levelOrderTraversal(TreeNode root, int level, List<Integer> list) {
         if (root == null) {
