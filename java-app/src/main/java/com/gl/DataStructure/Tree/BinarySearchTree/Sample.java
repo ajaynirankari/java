@@ -51,8 +51,6 @@ public class Sample {
         //tree.add(3);
         //tree.add(303);
         System.out.println("tree.getMaxMin() = " + tree.getMaxMin());
-
-        ArrayList l;
     }
 }
 
@@ -179,11 +177,7 @@ class BinarySearchTree {
     private int height(Node node) {
         if (node == null)
             return -1;
-        return max(height(node.left), height(node.right)) + 1;
-    }
-
-    private int max(int a, int b) {
-        return a > b ? a : b;
+        return Math.max(height(node.left), height(node.right)) + 1;
     }
 
     public void levelOrderTraversal() {
@@ -424,12 +418,11 @@ class BinarySearchTree {
         Pair left = getMaxMin(node.left);
         Pair right = getMaxMin(node.right);
 
-        Pair ret = new Pair(Math.max(node.data, right.max), Math.min(node.data, left.min));
-        //System.out.println(node.data + " -> {" + left + "," + right + "} => " + ret);
-        return ret;
+        return new Pair(Math.max(node.data, right.max), Math.min(node.data, left.min));
+
     }
 
-    class Pair {
+    static class Pair {
         int max;
         int min;
 
@@ -444,19 +437,13 @@ class BinarySearchTree {
         }
     }
 
-    private class Node {
+    private static class Node {
         int data;
         Node left;
         Node right;
 
         public Node(int data) {
             this.data = data;
-        }
-
-        public Node(int data, Node left, Node right) {
-            this.data = data;
-            this.left = left;
-            this.right = right;
         }
     }
 }
