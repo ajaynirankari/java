@@ -1,14 +1,12 @@
 package com.gl.MarkerInterface;
 
 import java.io.Serializable;
-import java.rmi.Remote;
 
 public class MarkerInterfaceDemo {
     public static void main(String[] args) throws Exception {
 
         Serializable s;
         Cloneable c;
-        Remote r;
 
         Test obj = new Test();
         obj.clone();

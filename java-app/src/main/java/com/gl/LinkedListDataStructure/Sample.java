@@ -1,7 +1,5 @@
 package com.gl.LinkedListDataStructure;
 
-import org.mockito.Mockito;
-
 public class Sample {
     public static void main(String[] args) {
         MyLinkedList myLinkedList = new MyLinkedList();

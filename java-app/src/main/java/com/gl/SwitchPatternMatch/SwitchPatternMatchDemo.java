@@ -25,7 +25,7 @@ public class SwitchPatternMatchDemo {
     static String switchForAnyType(Object object) {
         return switch (object) {
             case null -> "Got a null reference";
-            case Integer i && i.intValue() > 500 -> "Got Integer value > 500 -> " + i.intValue();
+            //case Integer i && i.intValue() > 500 -> "Got Integer value > 500 -> " + i.intValue();
             case Integer i -> "Got Integer value - " + i.intValue();
             case Double d -> "Got Double value - " + d.doubleValue();
             case Long l -> "Got Long value - " + l.longValue();
