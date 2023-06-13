@@ -21,6 +21,7 @@ public class Sample {
         // boolean isCheckValue(int x, int y){}
         // boolean isCheckValue(int x, int y, float f){}
 
+        System.out.println(" --------------------------------------- ");
         for (int n = 0; n < 10; n++) {
             if (isEvenNumber(n)) {
                 System.out.println("n = " + n);
@@ -32,11 +33,10 @@ public class Sample {
                 System.out.println("n = " + n);
             }
         }
+        System.out.println(" --------------------------------------- ");
+
         test(10);
         test(0);
-
-        int a = 10;
-        int b = 20;
 
         sum(100, 500);
         int x = sum(100, 500);
@@ -53,7 +53,6 @@ public class Sample {
         methodName();
         methodName();
 
-
         methodName1();
         int v = methodName1();
         System.out.println("v = " + v);
@@ -64,15 +63,15 @@ public class Sample {
         methodName3(8);
         int rr = methodName3(2);
         System.out.println("rr = " + rr);
-        System.out.println("=============================================");
 
+        System.out.println(" --------------------------------------- ");
         System.out.println("call methodName2(10) ");
         methodName2(10);
         System.out.println("after call methodName2() ");
         System.out.println("call methodName2(99) ");
         methodName2(99);
         System.out.println("after call methodName2() ");
-        System.out.println("=============================================");
+        System.out.println(" --------------------------------------- ");
 
     }
 
