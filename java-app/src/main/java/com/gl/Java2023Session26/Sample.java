@@ -9,10 +9,10 @@ public class Sample {
         System.out.println("input = " + Arrays.toString(input));
 
         insertionSortInAscendingOrder(input);
-        System.out.println("input = " + Arrays.toString(input));
+        System.out.println("insertionSortInAscendingOrder = " + Arrays.toString(input));
 
         insertionSortInDescendingOrder(input);
-        System.out.println("input = " + Arrays.toString(input));
+        System.out.println("insertionSortInDescendingOrder = " + Arrays.toString(input));
 
         // Time complexity    ------   depend upon the number of elements
         // Space complexity   ------   depend upon the number of elements
