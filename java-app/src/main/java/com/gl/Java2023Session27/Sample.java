@@ -8,11 +8,13 @@ public class Sample {
         int[] numbers = {2000, 6, 9, 7, 6, 7, 9, 7, 3, 3, 3, 3, 3, 3, 9, 2000, 2000, 500};
         System.out.println("input numbers = " + Arrays.toString(numbers));
 
-        System.out.println("---------------------allDuplicateCountInArray----------------------------");
+        System.out.println("-------------------------------------------------allDuplicateNumbersInArray----------------------------");
+        allDuplicateNumbersInArray(numbers);
+        System.out.println("-------------------------------------------------allDuplicateCountInArray----------------------------");
         allDuplicateCountInArray(numbers);
-        System.out.println("---------------------allUniqueDuplicateCountInArray----------------------------");
+        System.out.println("-------------------------------------------------allUniqueDuplicateCountInArray----------------------------");
         allUniqueDuplicateCountInArray(numbers);
-        System.out.println("---------------------allUniqueDuplicateViaFrequencyTable----------------------------");
+        System.out.println("-------------------------------------------------allUniqueDuplicateViaFrequencyTable----------------------------");
         allUniqueDuplicateViaFrequencyTable(numbers);
     }
 
@@ -24,6 +26,18 @@ public class Sample {
             }
         }
         return count;
+    }
+
+    static boolean isNumberDuplicateInArray(int[] intArray, int inputNumber) {
+        return duplicateCountInArray(intArray, inputNumber) > 1;
+    }
+
+    static void allDuplicateNumbersInArray(int[] intArray) {
+        for (int number : intArray) {
+            if (isNumberDuplicateInArray(intArray, number)) {
+                System.out.println("duplicate number: is = " + number);
+            }
+        }
     }
 
     static void allDuplicateCountInArray(int[] intArray) {
@@ -59,10 +73,13 @@ public class Sample {
     static void allUniqueDuplicateViaFrequencyTable(int[] intArray) {
         //int[] frequency = new int[intArray.length]; ?????
         //int[] frequency = new int[?????];
+        // Array length will be [max element of an input array] + 1
         int[] frequency = new int[max(intArray) + 1];
+
         for (int numberAsIndex : intArray) {
             frequency[numberAsIndex]++;
         }
+
         for (int i = 0; i < frequency.length; i++) {
             if (frequency[i] > 1) {
                 System.out.println("count of duplicate number: (" + i + ") is = " + frequency[i] + " times");
@@ -72,6 +89,7 @@ public class Sample {
 
     static int max(int[] a) {
         int max = 0;
+
         for (int e : a) {
             if (max < e) {
                 max = e;
