@@ -21,13 +21,13 @@ public class Sample {
         System.out.println("-------------------------------------------------------------");
 
         MyInterface myInterfaceLambdaExpression1 = (int x) -> {
-            System.out.println("test() method is called from Lambda express x * 4 = " + x * 4);
+            System.out.println("test() method is called from Lambda expression x * 4 = " + x * 4);
         };
         myInterfaceLambdaExpression1.test(10);
         System.out.println("-------------------------------------------------------------");
 
         MyInterface myInterfaceLambdaExpression3 = (x) -> {
-            System.out.println("test() method is called from Lambda express x * 6 = " + x * 6);
+            System.out.println("test() method is called from Lambda expression x * 6 = " + x * 6);
         };
         myInterfaceLambdaExpression3.test(10);
         System.out.println("-------------------------------------------------------------");
