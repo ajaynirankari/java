@@ -16,8 +16,7 @@ public class Sample {
             }
             fileOut.close();
             System.out.println("Success...");
-        } catch (
-                Exception e) {
+        } catch (Exception e) {
             System.out.println("ERROR = " + e);
         }
     }
