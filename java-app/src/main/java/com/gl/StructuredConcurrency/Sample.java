@@ -1,10 +1,8 @@
 package com.gl.StructuredConcurrency;
 
-import jdk.incubator.concurrent.StructuredTaskScope;
-
 import java.time.Duration;
 import java.util.Random;
-import java.util.concurrent.Future;
+import java.util.concurrent.StructuredTaskScope;
 
 public class Sample {
     public static void main(String[] args) throws Exception {
@@ -22,22 +20,21 @@ public class Sample {
 
         try (var scope = new StructuredTaskScope<String>()) {
 
-            Future<String> products_ = scope.fork(() -> getProducts(productId));
-            Future<String> productReviews_ = scope.fork(() -> getProductReviews(productId));
-            Future<String> productBestPrice_ = scope.fork(() -> getProductBestPrice(productId));
+            StructuredTaskScope.Subtask<String> products_ = scope.fork(() -> getProducts(productId));
+            StructuredTaskScope.Subtask<String> productReviews_ = scope.fork(() -> getProductReviews(productId));
+            StructuredTaskScope.Subtask<String> productBestPrice_ = scope.fork(() -> getProductBestPrice(productId));
 
             scope.join();
 
-            output = products_.resultNow() + " : " + productReviews_.resultNow() + " : " + productBestPrice_.resultNow();
+            output = products_.get() + " : " + productReviews_.get() + " : " + productBestPrice_.get();
             System.out.println("######## output = " + output);
         }
 
 
         try (var scope = new StructuredTaskScope.ShutdownOnSuccess<String>()) {
-
-            Future<String> productReviewA = scope.fork(() -> getProductReviewsA(productId));
-            Future<String> productReviewB = scope.fork(() -> getProductReviewsB(productId));
-            Future<String> productReviewC = scope.fork(() -> getProductReviewsC(productId));
+            scope.fork(() -> getProductReviewsA(productId));
+            scope.fork(() -> getProductReviewsB(productId));
+            scope.fork(() -> getProductReviewsC(productId));
 
             scope.join();
 
@@ -53,7 +50,7 @@ public class Sample {
             System.out.println("getProducts() productId = " + productId + ", processingTime = " + processingTime + " " + Thread.currentThread());
             Thread.sleep(Duration.ofSeconds(processingTime));
 
-        } catch (Exception e) {
+        } catch (Exception _) {
 
         }
         System.out.println("Return getProducts() productId = " + productId + " " + Thread.currentThread());
@@ -67,7 +64,7 @@ public class Sample {
             System.out.println("getProductReviews() productId = " + productId + ", processingTime = " + processingTime + " " + Thread.currentThread());
             Thread.sleep(Duration.ofSeconds(processingTime));
 
-        } catch (Exception e) {
+        } catch (Exception _) {
 
         }
         System.out.println("Return getProductReviews() productId = " + productId + " " + Thread.currentThread());
@@ -82,7 +79,7 @@ public class Sample {
             System.out.println("getProductReviewsA() productId = " + productId + ", processingTime = " + processingTime + " " + Thread.currentThread());
             Thread.sleep(Duration.ofSeconds(processingTime));
 
-        } catch (Exception e) {
+        } catch (Exception _) {
 
         }
         System.out.println("Return getProductReviewsA() productId = " + productId + " " + Thread.currentThread());
@@ -96,7 +93,7 @@ public class Sample {
             System.out.println("getProductReviewsC() productId = " + productId + ", processingTime = " + processingTime + " " + Thread.currentThread());
             Thread.sleep(Duration.ofSeconds(processingTime));
 
-        } catch (Exception e) {
+        } catch (Exception _) {
 
         }
         System.out.println("Return getProductReviewsC() productId = " + productId + " " + Thread.currentThread());
@@ -110,7 +107,7 @@ public class Sample {
             System.out.println("getProductReviewsB() productId = " + productId + ", processingTime = " + processingTime + " " + Thread.currentThread());
             Thread.sleep(Duration.ofSeconds(processingTime));
 
-        } catch (Exception e) {
+        } catch (Exception _) {
 
         }
         System.out.println("Return getProductReviewsA() productId = " + productId + " " + Thread.currentThread());
@@ -124,7 +121,7 @@ public class Sample {
             System.out.println("getProductBestPrice() productId = " + productId + ", processingTime = " + processingTime + " " + Thread.currentThread());
             Thread.sleep(Duration.ofSeconds(processingTime));
 
-        } catch (Exception e) {
+        } catch (Exception _) {
 
         }
         System.out.println("Return getProductBestPrice() productId = " + productId + " " + Thread.currentThread());

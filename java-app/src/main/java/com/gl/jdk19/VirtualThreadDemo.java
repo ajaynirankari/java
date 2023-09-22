@@ -51,7 +51,7 @@ public class VirtualThreadDemo {
                         try {
                             Thread.sleep(Duration.ofSeconds(1));
                             counter++;
-                        } catch (Exception e) {
+                        } catch (Exception _) {
                         }finally {
                             lock.unlock();
                         }
@@ -65,7 +65,7 @@ public class VirtualThreadDemo {
                         try {
                             Thread.sleep(Duration.ofSeconds(1));
                             counter++;
-                        } catch (Exception e) {
+                        } catch (Exception _) {
                         }finally {
                             lock.unlock();
                     }

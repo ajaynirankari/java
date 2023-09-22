@@ -1,10 +1,9 @@
 package com.gl.javachallenger;
 
-import jdk.incubator.concurrent.StructuredTaskScope;
-
 import java.io.Serializable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
+import java.util.concurrent.StructuredTaskScope;
 
 public class Sample {
     public static void main(String[] args) throws Exception {
@@ -69,8 +68,8 @@ public class Sample {
 
     static String getBestCharacter() throws ExecutionException {
         try (var scope = new StructuredTaskScope.ShutdownOnSuccess<String>()) {
-            Future<String> f1 = scope.fork(Sample::getData);
-            Future<String> f2 = scope.fork(Sample::getMcCoy);
+            scope.fork(Sample::getData);
+            scope.fork(Sample::getMcCoy);
             scope.join();
             return scope.result();
         } catch (InterruptedException e) {
@@ -80,10 +79,10 @@ public class Sample {
 
     static String getCharacter() {
         try (var scope = new StructuredTaskScope.ShutdownOnFailure()) {
-            Future<String> f1 = scope.fork(Sample::getData);
-            Future<String> f2 = scope.fork(Sample::getMcCoy);
+            StructuredTaskScope.Subtask<String> f1 = scope.fork(Sample::getData);
+            StructuredTaskScope.Subtask<String>  f2 = scope.fork(Sample::getMcCoy);
             scope.join();
-            return f1.resultNow() +"::"+ f2.resultNow();
+            return f1.get() +"::"+ f2.get();
         } catch (InterruptedException e) {
             throw new RuntimeException();
         }
