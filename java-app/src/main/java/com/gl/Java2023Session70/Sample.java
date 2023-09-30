@@ -55,7 +55,7 @@ public class Sample {
         Path copy = Files.copy(source, target);
         System.out.println("copy = " + copy);
 
-        copy(source, target1);
+        copy(source, target);
 
         Files.deleteIfExists(targetNew);
 
