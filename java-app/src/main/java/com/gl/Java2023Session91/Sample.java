@@ -15,21 +15,22 @@ public class Sample {
 
         Thread thread = Thread.startVirtualThread(Sample::myTask);
         thread.join();
-
+        System.out.println("------------------------------------------------------------");
 
         Thread thread1 = Thread.ofVirtual().start(Sample::myTask);
         thread1.join();
+        System.out.println("------------------------------------------------------------");
 
         Thread unstarted = Thread.ofVirtual().unstarted(Sample::myTask);
         unstarted.start();
         unstarted.join();
-
+        System.out.println("------------------------------------------------------------");
 
         Thread.Builder.OfVirtual ofVirtual1 = Thread.ofVirtual();
         Thread unstarted1 = ofVirtual1.unstarted(Sample::myTask);
         unstarted1.start();
         unstarted1.join();
-
+        System.out.println("------------------------------------------------------------");
 
         try (ExecutorService executorService = Executors.newVirtualThreadPerTaskExecutor()) {
             executorService.submit(Sample::myTask);
@@ -41,7 +42,6 @@ public class Sample {
         // Never do pool of virtual threads.
         // if possible do not use synchronized keyword, use Reentrant Lock
         // Lets the Lock interface for locking
-
 
         Thread.Builder.OfVirtual ofVirtual = Thread.ofVirtual();
         Thread.Builder.OfPlatform ofPlatform = Thread.ofPlatform();
