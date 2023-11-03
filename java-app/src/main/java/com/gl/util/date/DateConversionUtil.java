@@ -1,9 +1,10 @@
-package com.gl.util;
+package com.gl.util.date;
 
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
@@ -29,11 +30,11 @@ public class DateConversionUtil {
         date = calendar.getTime();
 
         Date convertedDate = convertDateInUTC(date, getZoneIdByName("Australia/Sydney"), getZoneIdByName("UTC"));
-        DateConversionUtil.convertDateFromUTC(convertedDate, getZoneIdByName("UTC"), getZoneIdByName("Australia/Sydney"));
+        convertDateFromUTC(convertedDate, getZoneIdByName("UTC"), getZoneIdByName("Australia/Sydney"));
         System.out.println("-----------------------------------------------------------------------------");
 
         convertedDate = convertDateInUTC(new Date(), getZoneIdByName("Asia/Calcutta"), getZoneIdByName("UTC"));
-        DateConversionUtil.convertDateFromUTC(convertedDate, getZoneIdByName("UTC"), getZoneIdByName("Asia/Calcutta"));
+        convertDateFromUTC(convertedDate, getZoneIdByName("UTC"), getZoneIdByName("Asia/Calcutta"));
         System.out.println("-----------------------------------------------------------------------------");
 
         convertedDate = convertDateInUTC(new Date(), getZoneIdByName("America/New_York"), getZoneIdByName("UTC"));
@@ -41,23 +42,23 @@ public class DateConversionUtil {
         System.out.println("-----------------------------------------------------------------------------");
 
         convertDateFromUTCtoAgainNewCompnayTimezone(new Date(), "Asia/Singapore", "Asia/Calcutta");
+        System.out.println("-----------------------------------------------------------------------------");
+
+        convertFromZoneDateToDateZone(LocalDateTime.now(), ZoneId.of("Asia/Calcutta"), ZoneId.of("UTC"));
+        System.out.println("-----------------------------------------------------------------------------");
+
+        convertFromZoneDateToDateZone(LocalDateTime.now(), ZoneId.of("America/New_York"), ZoneId.of("UTC"));
     }
 
     public static Date convertDateInUTC(Date date, TimeZone fromTimeZone, TimeZone toTimeZone) {
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(date);
-        calendar.set(Calendar.HOUR_OF_DAY, 23);
-        calendar.set(Calendar.MINUTE, 59);
-        calendar.set(Calendar.SECOND, 59);
-        date = calendar.getTime();
-        DateFormat simpleDateFormate = new SimpleDateFormat(DATE_FORMATTER);
-        date = getLocalTimestamp(simpleDateFormate.format(date), fromTimeZone, toTimeZone);
+        DateFormat simpleDateFormat = new SimpleDateFormat(DATE_FORMATTER);
+        date = getLocalTimestamp(simpleDateFormat.format(date), fromTimeZone, toTimeZone);
         return date;
     }
 
     public static Date convertDateFromUTC(Date date, TimeZone fromTimeZone, TimeZone toTimeZone) {
-        DateFormat simpleDateFormate = new SimpleDateFormat(DATE_FORMATTER);
-        date = getLocalTimestamp(simpleDateFormate.format(date), fromTimeZone, toTimeZone);
+        DateFormat simpleDateFormat = new SimpleDateFormat(DATE_FORMATTER);
+        date = getLocalTimestamp(simpleDateFormat.format(date), fromTimeZone, toTimeZone);
         return date;
     }
 
@@ -89,6 +90,15 @@ public class DateConversionUtil {
         }
         System.out.println("converted date = " + utcDate);
         return utcDate;
+    }
+
+    public static void convertFromZoneDateToDateZone(LocalDateTime localDateTime, ZoneId fromZoneId, ZoneId toZoneId) {
+        System.out.println("    input date = " + localDateTime + ", fromTimeZone = " + fromZoneId + "[" + LocalDateTime.now().atZone(fromZoneId).getOffset() + "], toTimeZone = " + toZoneId + "[" + LocalDateTime.now().atZone(toZoneId).getOffset() + "]");
+        ZonedDateTime fromZonedDateTime = localDateTime.atZone(fromZoneId);
+        ZonedDateTime toZonedDateTime = fromZonedDateTime.withZoneSameInstant(toZoneId);
+        System.out.println("converted toZonedIdDateTime = " + toZonedDateTime);
+        ZonedDateTime fromZoneIdDateTime = toZonedDateTime.withZoneSameInstant(fromZoneId);
+        System.out.println("converted fromZoneIdDateTime = " + fromZoneIdDateTime);
     }
 
     public static TimeZone getZoneIdByName(String zoneName) {
